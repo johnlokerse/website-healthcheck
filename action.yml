@@ -1,5 +1,8 @@
-name: "Checks the status of a website and scans for a specific text"
-description: "Smoketest: this action checks if a website contains a specific text."
+name: "Website Healthcheck"
+description: "Website status checking and text scanning"
+branding:
+  icon: activity
+  color: white
 inputs:
   web-url:
     description: "Specify the URL to scan"
