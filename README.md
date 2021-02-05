@@ -1,6 +1,6 @@
 # Website Healthcheck Action
 
-This actions checks your website if it's returning statuscode 200 and checks for specified text on the given page.
+This actions checks your website if it's returning status code 200 and checks for specified text on the given page.
 
 An example of website-healthcheck in a GitHub Action:
 
