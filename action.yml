@@ -12,5 +12,7 @@ runs:
   steps:
     - run: echo Scanning ${{ inputs.web-url }} for string ${{ inputs.scan-for-text }}
       shell: bash
+    - run: chmod +x ${{ github.action_path }}/scan-website.sh
+      shell: bash
     - run: ${{ github.action_path }}/scan-website.sh ${{ inputs.web-url }} ${{ inputs.scan-for-text }}
       shell: bash
