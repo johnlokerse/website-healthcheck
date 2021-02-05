@@ -1,0 +1,16 @@
+name: "Checks the status of a website and scans for a specific text"
+description: "Smoketest: this action checks if a website contains a specific text."
+inputs:
+  web-url:
+    description: "Specify the URL to scan"
+    required: true
+  scan-for-text:
+    description: "Specify the string that has to be scanned"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: echo Scanning ${{ inputs.web-url }} for string ${{ inputs.scan-for-text }}
+      shell: bash
+    - run: ${{ github.action_path }}/scan-website.sh ${{ inputs.web-url }} ${{ inputs.scan-for-text }}
+      shell: bash
