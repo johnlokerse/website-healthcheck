@@ -7,7 +7,7 @@ if [ "${status_code}" != "200" ]; then
     exit 1
 fi
 
-if ! $(curl --silent --location "{$website_url}" | grep --quiet --ignore-case "${scan_text}"); then
+if ! curl --silent --location "{$website_url}" | grep --quiet --ignore-case "${scan_text}"; then
     echo "Text was not found on website" >&2
     exit 1
 fi
