@@ -1,15 +1,28 @@
 website_url=$1
 scan_text=$2
-status_code=$(curl --silent --location --head --output /dev/null --write-out "%{http_code}" "${website_url}")
+max_attempts=$3
+retry_delay=$4
 
-if [ "${status_code}" != "200" ]; then
-    echo "Website is unreachable (${status_code})" >&2
-    exit 1
-fi
+counter=1
 
-if ! curl --silent --location "{$website_url}" | grep --quiet --ignore-case "${scan_text}"; then
-    echo "Text was not found on website" >&2
-    exit 1
-fi
+while [ $counter -le $max_attempts ]
+do
+    status_code=$(curl --silent --location --head --output /dev/null --write-out "%{http_code}" "${website_url}")
 
-exit 0
+    if [ "${status_code}" = "200" ]; then
+        if curl --silent --location "{$website_url}" | grep --quiet --ignore-case "${scan_text}"; then
+            echo "Successful healthcheck" >&2
+            exit 0
+        fi
+    fi
+
+    if [ $counter -eq $max_attempts ]; then
+        echo "Unsuccessful healthcheck" >&2
+        exit 1
+    fi
+
+    ((counter=counter+1))
+
+    sleep $retry_delay
+
+done
