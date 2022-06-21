@@ -1,6 +1,6 @@
 # Website Healthcheck Action
 
-This actions checks your website if it's returning status code 200 and checks for specified text on the given page.
+This actions checks your website if it is returning status code 200 and checks for specified text on the given page.
 It retries the check while it gives error code for a user-defined maximum number of attempts. 
 The delay between retries is also user-defined.
 
