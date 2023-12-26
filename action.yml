@@ -10,6 +10,9 @@ inputs:
   scan-for-text:
     description: "Specify the string that has to be scanned"
     required: true
+  insecure:
+    description: "Set to true to disable TSL certificate checking"
+    default: false
 runs:
   using: "composite"
   steps:
@@ -17,5 +20,5 @@ runs:
       shell: bash
     - run: chmod +x ${{ github.action_path }}/scan-website.sh
       shell: bash
-    - run: ${{ github.action_path }}/scan-website.sh ${{ inputs.web-url }} ${{ inputs.scan-for-text }}
+    - run: ${{ github.action_path }}/scan-website.sh ${{ inputs.insecure }} ${{ inputs.web-url }} ${{ inputs.scan-for-text }}
       shell: bash
